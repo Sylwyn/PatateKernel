@@ -13,7 +13,7 @@ objects = $(sources:src/%.c:obj/%.o)
 target = patate
 
 bin/$(target): $(objects)
-	$(LINKER) $(objects) $(LDPARAMS) -o $@
+	$(LINKER) $(objects) $(LDPARAMS) -$< -o $@
 	
 $(objects): obj/%.o : src/%.c
 	gcc $(GPARAMS) -o $@ -c $<
