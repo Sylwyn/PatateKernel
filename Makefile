@@ -1,6 +1,6 @@
 LINKER = ld
 
-CPARAMS = -std=gnu99 -O2 -Wall -Wextra
+CPARAMS = -m32 -std=gnu99 -O2 -Wall -Wextra 
 
 ASPARAMS = --32
 
@@ -16,7 +16,7 @@ bin/$(target): src/linker.ld $(objects)
 	$(LINKER) $(LDPARAMS) -T $< -o $@ $(objects) 
 	
 obj/%.o : src/%.c
-	gcc $(GPARAMS) -o $@ -c $<
+	gcc $(CPARAMS) -o $@ -c $<
 
 obj/%.o: src/%.s 
 	as $(ASPARAMS) -o $@ $<
@@ -27,4 +27,4 @@ all: bin/$(target)
 
 clean: 
 	rm -f bin/$(target)
-	rm -f obj/$(objects)
+	rm -f $(objects)
