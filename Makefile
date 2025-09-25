@@ -11,6 +11,8 @@ sources = $(wildcard src/*.c) $(wildcard src/*.s)
 objects = $(patsubst src/%.c,obj/%.o,$(wildcard src/*.c)) $(patsubst src/%.s,obj/%.o,$(wildcard src/*.s))
 target = patate
 
+all: patate.iso
+
 bin/$(target): src/linker.ld $(objects)
 	mkdir -p bin
 	$(LINKER) $(LDPARAMS) -T $< -o $@ $(objects) 
@@ -35,14 +37,12 @@ patate.iso: bin/patate
 	#echo 'set pager=1' >> iso/boot/grub/grub.cfg
 	#echo 'set deubg=all' >> iso/boot/grub/grub.cfg
 	echo '' >> iso/boot/grub/grub.cfg
-	echo 'menuentry "MyOS UwU" {' >> iso/boot/grub/grub.cfg
+	echo 'menuentry "Patate Kernel" {' >> iso/boot/grub/grub.cfg
 	echo ' multiboot /boot/patate' >> iso/boot/grub/grub.cfg
 	echo ' boot' >> iso/boot/grub/grub.cfg
 	echo '}' >> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=$@ iso
 	rm -rf iso
-
-all: patate.iso
 
 
 .PHONY: all clean
