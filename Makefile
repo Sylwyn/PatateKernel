@@ -1,10 +1,10 @@
 LINKER = ld
 
-CPARAMS = -m32 -std=gnu99 -O2 -Wall -Wextra 
+CPARAMS = -std=gnu99 -O2 -Wall -Wextra #-32 
 
-ASPARAMS = --32
+ASPARAMS = #--32
 
-LDPARAMS = -melf_i386
+LDPARAMS = #-melf_i386
 
 sources = $(wildcard src/*.c) $(wildcard src/*.s)
 
