@@ -1,6 +1,6 @@
-.set FLAGS 1<<0|1<<1
-.set MAGIC 0x1BADB002
-.set CHECKSUM -(MAGIC + FLAGS)
+.set FLAGS, 1<<0|1<<1
+.set MAGIC, 0x1BADB002
+.set CHECKSUM, -(MAGIC + FLAGS)
 
 .section .multiboot
 .long MAGIC
@@ -11,7 +11,7 @@
 .global patate
 .type patate, @function
 patate:
-	mov $patate_stack %esp
+	mov $patate_stack, %esp
 	
 	call patate_main
 
