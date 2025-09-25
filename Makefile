@@ -12,13 +12,13 @@ objects = $(sources:src/%.c:obj/%.o)
 
 target = patate
 
-bin/$(target): $(objects)
-	$(LINKER) $(objects) $(LDPARAMS) -$< -o $@
+bin/$(target): linker.ld $(objects)
+	$(LINKER) $(LDPARAMS) -T $< -o $@ $(objects)
 	
 $(objects): obj/%.o : src/%.c
 	gcc $(GPARAMS) -o $@ -c $<
 
-($objects): obj/%.o: src/%.s 
+$(objects): obj/%.o: src/%.s 
 	as $(ASPARAMS) -o $@ $<
 
 all: $(target)
