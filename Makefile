@@ -8,13 +8,12 @@ LDPARAMS = -melf_i386
 
 sources = $(wildcard src/*.c) $(wildcard src/*.s)
 
-objects = $(sources:src/%.c=obj/%.o) $(sources:src/%.s=obj/%.o)
-
+objects = $(patsubst src/%.c,obj/%.o,$(wildcard src/*.c)) $(patsubst src/%.s,obj/%.o,$(wildcard src/*.s))
 target = patate
 
 bin/$(target): src/linker.ld $(objects)
-	echo $(objects)
-	$(LINKER) $(LDPARAMS) -T $< -o $@ $(objects)
+	mkdir -p bin
+	$(LINKER) $(LDPARAMS) -T $< -o $@ $(objects) 
 	
 obj/%.o : src/%.c
 	gcc $(GPARAMS) -o $@ -c $<
