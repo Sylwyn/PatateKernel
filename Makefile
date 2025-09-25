@@ -44,6 +44,10 @@ patate.iso: bin/patate
 	grub-mkrescue --output=$@ iso
 	rm -rf iso
 
+#launch VM containing the os ( only after having configurated it in virtual box ) 
+run: patate.iso
+	(killall VirtualBoxVM && sleep 1) || true
+	VirtualBoxVM --startvm "patatekernel" &
 
 .PHONY: all clean
 
