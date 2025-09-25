@@ -6,25 +6,26 @@ ASPARAMS = --32
 
 LDPARAMS = -melf_i386
 
-sources = $(wildcard src/*.c)
+sources = $(wildcard src/*.c) $(wildcard src/*.s)
 
-objects = $(sources:src/%.c:obj/%.o)
+objects = $(sources:src/%.c=obj/%.o) $(sources:src/%.s=obj/%.o)
 
 target = patate
 
-bin/$(target): linker.ld $(objects)
+bin/$(target): src/linker.ld $(objects)
+	echo $(objects)
 	$(LINKER) $(LDPARAMS) -T $< -o $@ $(objects)
 	
-$(objects): obj/%.o : src/%.c
+obj/%.o : src/%.c
 	gcc $(GPARAMS) -o $@ -c $<
 
-$(objects): obj/%.o: src/%.s 
+obj/%.o: src/%.s 
 	as $(ASPARAMS) -o $@ $<
 
-all: $(target)
+all: bin/$(target)
 
 .PHONY: all clean
 
 clean: 
-	rm bin/$(target)
-	rm obj/$(objects)
+	rm -f bin/$(target)
+	rm -f obj/$(objects)
