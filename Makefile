@@ -1,6 +1,6 @@
 LINKER = ld
 
-CPARAMS = -std=gnu99 -O2 -Wall -Wextra #-32 
+CPARAMS = -std=gnu99 -O2 -Wall -Wextra -nostdlib -fno-builtin #-32 
 
 ASPARAMS = #--32
 
