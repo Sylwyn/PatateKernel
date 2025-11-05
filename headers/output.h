@@ -3,7 +3,7 @@
 
 void initialize_output();
 
-void print_string(char *s);
+void print_string(char * s);
 
 void print_int(int n);
 

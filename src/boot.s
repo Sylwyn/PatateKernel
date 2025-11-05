@@ -8,11 +8,16 @@
 .long CHECKSUM
 
 .section .text
+.extern patate_main
 .global patate
-.type patate, @function
+;.type patate, @function
+
 patate:
 	mov $patate_stack, %esp
 	
+	push %rax
+	push %rbx
+
 	call patate_main
 
 	_stop:

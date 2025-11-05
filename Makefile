@@ -46,7 +46,7 @@ patate.iso: bin/patate
 
 #launch VM containing the os ( only after having configurated it in virtual box ) 
 run: patate.iso
-	(killall VirtualBoxVM && sleep 1) || true
+	(pkill VirtualBoxVM && sleep 1) || true
 	VirtualBoxVM --startvm "patatekernel" &
 
 .PHONY: all clean
