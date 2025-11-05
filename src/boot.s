@@ -26,7 +26,7 @@ patate:
 	jmp _stop
 
 .section bss
-.space 2*1024*1024
+.space 8*1024*1024
 
 patate_stack:
 
